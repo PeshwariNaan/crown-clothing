@@ -7,6 +7,7 @@ class Directory extends React.Component {
     super();
 
     this.state = {
+      //Here we are using json objects as the state instead of importing them from a url like in the monsters rolodex - it's just an array with these values we want to access. It's better to have a data file for easier updating
       sections: [
         {
           title: "hats",
@@ -47,8 +48,16 @@ class Directory extends React.Component {
   render() {
     return (
       <div className="directory-menu">
-        {this.state.sections.map(({ title, imageUrl, id, size }) => (
-          <MenuItem key={id} title={title} imageUrl={imageUrl} size={size}/>
+        {this.state.sections.map((
+          { title, imageUrl, id, size, linkUrl } //destructuring in the map function makes it a little easier but not much - we would only have to type sections.title below instead
+        ) => (
+          <MenuItem
+            key={id}
+            title={title}
+            imageUrl={imageUrl}
+            size={size}
+            linkUrl={linkUrl}
+          />
         ))}
       </div>
     );
