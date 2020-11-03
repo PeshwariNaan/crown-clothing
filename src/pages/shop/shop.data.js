@@ -193,14 +193,12 @@ const SHOP_DATA = [
         id: 28,
         name: 'Yellow Track Suit',
         imageUrl: 'https://i.ibb.co/v1cvwNf/yellow-track-suit.png',
-        imageUrl: "/images/shop-img/womens/yellow-track-suit.png",
         price: 135
       },
       {
         id: 29,
         name: 'White Blouse',
         imageUrl: 'https://i.ibb.co/qBcrsJg/white-vest.png',
-        imageUrl: "/images/shop-img/womens/white-vest.png",
         price: 20
       }
     ]
