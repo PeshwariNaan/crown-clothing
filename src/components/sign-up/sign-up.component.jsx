@@ -6,7 +6,7 @@ import CustomButton from '../custum-button/custom-button.component';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import './sign-up.styles.scss'
-import { render } from '@testing-library/react';
+//import { render } from '@testing-library/react';
 
 class SignUp extends React.Component {
     constructor() {
@@ -26,7 +26,7 @@ class SignUp extends React.Component {
 
         const {displayName, email, password, confirmPassword} = this.state;
 
-        if(password != confirmPassword) {;
+        if(password !== confirmPassword) {;
             return;
         }
 

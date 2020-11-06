@@ -32,6 +32,6 @@ const Header = ( {currentUser}) => ( //The 'currentUser' is coming from our redu
 
 const mapStateToProps = state => ({ //The 'state' being passed here is the top level rootReducer
     currentUser: state.user.currentUser
-})
+});
 
 export default connect(mapStateToProps)(Header);

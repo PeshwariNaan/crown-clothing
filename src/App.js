@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homepage/hompage.component';
 import ShopPage from './pages/shop/shop.component';
@@ -17,8 +17,7 @@ class App extends React.Component {
 
   //Below is how we get the authentication to work using our firebase.auth() that we exported in the utils - this way we don't have to remount our entire app
   componentDidMount() {
-
-    const {setCurrentUser} = this.props;
+    const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -31,7 +30,7 @@ class App extends React.Component {
           });
         });
       } else {
-        setCurrentUser({ currentUser: userAuth });
+        setCurrentUser(userAuth);
       }
 
       // this.setState({ currentUser: user});
@@ -53,14 +52,27 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInAndSignUpPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
         </Switch>
       </div>
     );
   }
 }
-  
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
 });
-export default connect(null,mapDispatchToProps)(App);
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
