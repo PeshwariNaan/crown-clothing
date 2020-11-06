@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {auth} from '../../firebase/firebase.utils';
+import { connect } from 'react-redux'; //This is a higher order components that allows us to have access to things related to redux
 
 import { ReactComponent as Logo} from '../../assets/crown.svg';
 
 import './header.styles.scss';
 
-const Header = ( {currentUser}) => (
+const Header = ( {currentUser}) => ( //The 'currentUser' is coming from our reducer via { connect }
     <div className='header'>
     <Link className='logo-container' to='/'>
         <Logo className='log' />
@@ -29,4 +30,8 @@ const Header = ( {currentUser}) => (
     </div>
 );
 
-export default Header;
+const mapStateToProps = state => ({ //The 'state' being passed here is the top level rootReducer
+    currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Header);
