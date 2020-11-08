@@ -47,7 +47,7 @@ class App extends React.Component {
     return (
       <div>
         {/* The currentUser prop will let the header know if the user is signed in or not */}
-        <Header />{" "}
+        <Header />
         {/*With Header placed here - It will show up on all pages below - we want the header to pull the current state of the user off of our reducer - not from above*/}
         <Switch>
           <Route exact path="/" component={HomePage} />

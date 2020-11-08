@@ -11,12 +11,10 @@ const CollectionPreview = ({ title, items }) => (
       {/* Below the filter and the map functions are nested as to dispaly only 4 of the items using this index and data from the data file.*/}
       {items
         .filter((item, index) => index < 4)
-        .map(({ id, name, imageUrl, price }) => (
+        .map((item) => (
           <CollectionItem
-            key={id}
-            name={name}
-            imageUrl={imageUrl}
-            price={price}
+            key={item.id}
+           item={item}
           />
         ))}
       
