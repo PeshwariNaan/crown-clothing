@@ -2,8 +2,12 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {auth} from '../../firebase/firebase.utils';
 import { connect } from 'react-redux'; //This is a higher order components that allows us to have access to things related to redux
+import { createStructuredSelector } from 'reselect';
+
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import {selectCartHidden} from '../../redux/cart/cart.selectors';
+import {selectCurrentUser} from '../../redux/user/user.selector';
 
 import { ReactComponent as Logo} from '../../assets/crown.svg';
 
@@ -32,7 +36,6 @@ const Header = (
           </div>
         ) : (
           <Link className="option" to="/signin">
-            {" "}
             SIGN IN
           </Link>
         )
@@ -47,9 +50,9 @@ const Header = (
   </div>
 );
 
-const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({ //The 'state' being passed here is the top level rootReducer
-    currentUser,
-    hidden
+const mapStateToProps = createStructuredSelector({ //The 'state' being passed here is the top level rootReducer
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(Header);
