@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions';
 import {selectCurrentUser} from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
-
+//import {selectCollectionsForPreview} from './redux/shop/shop.selector';
 
 
 
@@ -39,6 +39,7 @@ class App extends React.Component {
         });
       } else {
         setCurrentUser(userAuth);
+        // addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({ title, items})));
       }
 
       // this.setState({ currentUser: user});
@@ -46,7 +47,9 @@ class App extends React.Component {
     });
   }
 
-  //This is how we clsoe the subscription but I still don't understand what is happening here
+
+
+  //This is how we close the subscription but I still don't understand what is happening here
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
@@ -79,9 +82,10 @@ class App extends React.Component {
 }
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
+ // collectionsArray: selectCollectionsForPreview
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setCurrentUser: (user) => dispatch(setCurrentUser(user))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);

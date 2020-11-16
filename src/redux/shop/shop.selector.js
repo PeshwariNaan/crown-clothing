@@ -21,13 +21,14 @@ export const selectCollections = createSelector(
 //After we changed the data to an object for the data normalization we were no longer able to map the data for the collection overview. The below selector is used to convert the object into an array so we can use map again in collections-overview component
 export const selectCollectionsForPreview = createSelector(
     [selectCollections],
-    collections => Object.keys(collections).map(key => collections[key])
+    (collections) =>
+    collections ? Object.keys(collections).map(key => collections[key]) : []
     //We change the keys to an array and then map that array to get the value of our collections at that key which is our items in that category.
 )
 
 export const selectCollection = collectionUrlParam => createSelector(
     [selectCollections],
-    collections => collections[collectionUrlParam]
+    collections => (collections ? collections[collectionUrlParam] : null)
 
     //Below is the code we used before the data normalization
     // collections => collections.find(collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam])
